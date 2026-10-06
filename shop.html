@@ -10,7 +10,7 @@ function calc(){let lines=[],tot=0,base=0;PS.forEach(p=>{const q=cart[p.id]||0;i
 function save(){localStorage.setItem('chagcart',JSON.stringify(cart))}
 function render(){
  $('#products').innerHTML=PS.map(p=>{const q=cart[p.id]||0;
-  return `<div class="prod"><img src="${p.image==="@PRODIMG"?PRODIMG:p.image}" alt="${p.name}"><div class="b"><h3>${p.name}</h3><div class="pr">${money(p.price)} <small>${p.priceNote||''}</small></div>${p.neighborPrice?`<div class="nb"><span>SPECIAL</span> ${money(p.neighborPrice)} each with neighbors</div>`:''}<p>${p.blurb}</p>
+  return `<div class="prod"><img src="${p.image==="@PRODIMG"?PRODIMG:p.image}" alt="${p.name}"><div class="b"><h3>${p.name}</h3><div class="pr">${money(p.price)} <small>${p.priceNote||''}</small></div>${p.neighborPrice?`<div class="nb"><span>TEAM DEAL</span> Order with neighbors or friends. 2 or more: ${money(p.price-p.neighborPrice)} off each, ${money(p.neighborPrice)} per unit.</div>`:''}<p>${p.blurb}</p>
   <button class="btn" data-add="${p.id}">${q?'Add another':'Add to cart'}</button>${q?`<div style="margin-top:8px;color:#FF7800;font-weight:700">${q} in cart</div>`:''}
   <a class="btn ghost" href="https://wa.me/${WA_NUM}?text=${encodeURIComponent('Hi, I would like to order the '+p.name+'.')}">Order on WhatsApp</a></div></div>`}).join('');
  const c=calc(),n=units();
@@ -19,7 +19,7 @@ function render(){
  const first=PS.find(p=>p.neighborPrice);
  $('#lines').innerHTML=c.lines.map(l=>`<div class="ln"><div><b>${l.p.name}</b><br><small>${money(l.u)} each${l.p.priceNote?' '+l.p.priceNote:''}</small></div><div class="qty"><button type="button" data-dec="${l.p.id}" aria-label="Less">-</button><span>${l.q}</span><button type="button" data-inc="${l.p.id}" aria-label="More">+</button></div><div class="lt">${money(l.q*l.u)}</div></div>`).join('');
  $('#tot').textContent=money(c.tot);
- $('#sv').innerHTML=c.save>0?`<span class="good">You save ${money(c.save)}</span> with the 2+ price of ${money(first.neighborPrice)} each`:(first?`Order 2 or more and the price drops to ${money(first.neighborPrice)} each, for the whole cart`:'');
+ $('#sv').innerHTML=c.save>0?`<span class="good">Team deal applied: ${money(first.price-first.neighborPrice)} off each unit. You save ${money(c.save)}.</span>`:(first?`Add one more unit (split it with a neighbor or friend) and every unit drops to ${money(first.neighborPrice)}.`:'');
 }
 document.addEventListener('click',e=>{const t=e.target;
  if(t.dataset.add){cart[t.dataset.add]=(cart[t.dataset.add]||0)+1;save();render();$('#cart').scrollIntoView({behavior:'smooth',block:'start'})}
