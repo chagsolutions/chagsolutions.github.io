@@ -10,7 +10,7 @@ function calc(){let lines=[],tot=0,base=0;PS.forEach(p=>{const q=cart[p.id]||0;i
 function render(){
  const c=calc();
  $('#products').innerHTML=PS.map(p=>{const q=cart[p.id]||0;
-  return `<div class="prod"><img src="${p.image==="@PRODIMG"?PRODIMG:p.image}" alt="${p.name}"><div class="b"><h3>${p.name}</h3><div class="pr">${money(p.price)} <small>${p.priceNote||''}</small></div>${p.neighborPrice?`<div class="deal">2+ = ${money(p.neighborPrice)} each</div>`:''}
+  return `<div class="prod"><img src="${p.image==="@PRODIMG"?PRODIMG:p.image}" alt="${p.name}"><div class="b"><h3>${p.name}</h3><div class="pr">${money(p.price)} <small>${p.priceNote||''}</small></div>${p.neighborPrice?`<div class="deal">Buy 2+ and get ${money(p.price-p.neighborPrice)} discount per unit.</div>`:''}
   <div class="qty big"><button type="button" data-dec="${p.id}" aria-label="Less">-</button><span>${q}</span><button type="button" data-inc="${p.id}" aria-label="More">+</button></div></div></div>`}).join('');
  const n=units();
  $('#tot').textContent=money(c.tot);
