@@ -1,6 +1,6 @@
 # CHAG Solutions brand masters
 
-Final approved logos (three-logos-v3). Not linked from the website.
+Final approved logos (three-logos-v6). Not linked from the website.
 All three wordmarks share the same height and baseline. CHAG is the original file, unchanged.
 
 Each logo folder (chag/, tetriph/, phlux/) holds, with <name> = chag, tetriph or phlux:
