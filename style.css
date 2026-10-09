@@ -1,3 +1,4 @@
+@import url("theme.css");
 :root{--o:#ff7800;--k:#0d0d0d;--k2:#171717;--w:#fff;--g:#b8b8b8}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--k);color:var(--w);font-family:Montserrat,"Segoe UI",system-ui,Arial,sans-serif;line-height:1.55}
