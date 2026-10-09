@@ -70,3 +70,6 @@ header nav a.on{color:var(--o)}
 .page.wrap{padding-left:20px;padding-right:20px}.form>button.btn+button.btn{margin-top:0}.form>button.btn[type=button]{margin-top:0}.form>button.btn[type=submit]{margin-top:20px}.cbtns{gap:12px}.cbtns .btn{margin-left:0}
 
 .cl b{color:#ff7800}
+
+/* Equal outer heights including borders and inline page rules. */
+.btn,.form .btn,.cartbox .btn,.payment .btn{box-sizing:border-box;height:48px;min-height:48px;padding-top:0!important;padding-bottom:0!important;line-height:1.35}.qty.big button{width:44px;height:44px}.form #wa{height:48px}.btn.small{height:44px;min-height:44px}
