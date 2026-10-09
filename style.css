@@ -62,3 +62,11 @@ header nav a.on{color:var(--o)}
 .cartbox pre{white-space:pre-wrap;background:#0c0c0c;border-radius:12px;padding:14px;font-size:14px;color:#ddd}
 .deal{display:inline-block;background:#FF7800;color:#000;font-weight:900;font-size:clamp(15px,4.3vw,24px);line-height:1.25;padding:10px 12px;display:block;text-align:center;border-radius:12px;margin:10px 0 16px}.qty.big{justify-content:center;gap:22px}.qty.big button{width:56px;height:56px;font-size:30px}.qty.big span{font-size:30px;min-width:40px}.btn.big{display:block;box-sizing:border-box;width:100%;font-size:20px;line-height:24px;padding:16px 20px;border-radius:16px;text-align:center;margin:12px 0 0;font-family:inherit}.btn.big:disabled{opacity:.4}.cartbox .form{gap:12px}.prod .b{text-align:center}.prod .pr{justify-content:center}.cartbox .form{max-width:none}.cartbox input{font-size:18px;padding:16px}.svl{color:#FF7800;font-weight:800;min-height:22px;font-size:18px}
 @media(max-width:480px){header .wrap{gap:8px;padding:0 12px}header nav{gap:9px;font-size:11px;letter-spacing:.02em}.cartbox{padding:18px}.ln{flex-wrap:wrap}}
+
+/* Uniform action style, approved October 8. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;min-height:48px;padding:10px 24px;line-height:1.35}.btn.big{min-height:52px}.btn.small{min-height:44px;padding:8px 16px}.btn+.btn{margin-left:12px}.actions,.cta,.buttons{display:flex;flex-wrap:wrap;gap:12px}.actions>.btn,.cta>.btn,.buttons>.btn{margin-left:0}.qty{gap:12px}.qty button{border-radius:999px;min-width:44px;min-height:44px}.form>.btn,form>.btn{margin-top:20px}.field-row{gap:16px}
+.form .btn,.cartbox .btn,.payment .btn{border-radius:999px;min-height:48px;font-size:16px;padding:10px 24px}.form>#wa,.form>#sb{width:100%;margin-left:0}.form>#wa{margin-top:12px}.qty button{width:44px;height:44px;min-height:44px}.location-use{min-height:44px;padding:10px 0}.btn+.btn{margin-left:0}.btn.small{min-height:44px;font-size:14px}.field-row,.address-row,.pair,.triple{gap:16px}
+
+.page.wrap{padding-left:20px;padding-right:20px}.form>button.btn+button.btn{margin-top:0}.form>button.btn[type=button]{margin-top:0}.form>button.btn[type=submit]{margin-top:20px}.cbtns{gap:12px}.cbtns .btn{margin-left:0}
+
+.cl b{color:#ff7800}
