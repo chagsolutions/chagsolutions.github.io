@@ -56,8 +56,8 @@ function validateOrderFields(focus=true){let messages=[],firstBad;Object.entries
 $('#of').addEventListener('submit',e=>{e.preventDefault();
  const c=calc();if(!c.lines.length||!validateOrderFields())return;
  const f=new FormData(e.target);
- const order={promo:null,lines:c.lines.map(l=>({name:l.p.name,q:l.q,u:l.u})),tot:c.tot,save:c.save,firstName:f.get('firstName'),lastName:f.get('lastName'),phone:f.get('phone'),email:f.get('email'),street:f.get('street'),city:f.get('city'),state:f.get('state'),zip:f.get('zip')};
- try{sessionStorage.setItem('chagPendingOrder',JSON.stringify(order))}catch(err){alert('Please allow session storage to continue to the next page.');return}
+ const order={promo:null,lines:c.lines.map(l=>({name:l.p.name,q:l.q,u:l.u,regularPrice:l.p.price,product_id:l.p.id})),tot:c.tot,save:c.save,firstName:f.get('firstName'),lastName:f.get('lastName'),phone:f.get('phone'),email:f.get('email'),street:f.get('street'),city:f.get('city'),state:f.get('state'),zip:f.get('zip')};
+ try{sessionStorage.removeItem('chagShopTestCompletion');sessionStorage.removeItem('chagShopTestAttempt');sessionStorage.setItem('chagShopTestOrder',JSON.stringify(order))}catch(err){alert('Please allow session storage to continue to the next page.');return}
  location.href='shop/payment/';
 });
 fetch("products.json").then(r=>r.json()).then(ps=>{PS=ps;render()});
