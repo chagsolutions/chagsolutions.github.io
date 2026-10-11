@@ -45,3 +45,7 @@ html:root{color-scheme:dark}
 /* One brand orange in both appearances. */
 html .cl b{color:#ff7800}
 @media(prefers-color-scheme:light){html #promo-code,html #payment-promo{background:#fff!important;color:#151515!important;border-color:#bbb!important}}
+
+/* Seal artwork carries its matching background; no client recoloring. */
+html #hbar .ap img{background:#000}
+@media(prefers-color-scheme:light){html #hbar .ap img{background:#fff}}
