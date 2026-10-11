@@ -20,3 +20,6 @@ w.addEventListener('click',close);document.addEventListener('click',close);
 var y0=0;window.addEventListener('scroll',function(){if(w.classList.contains('on')&&Math.abs(window.scrollY-y0)>12)close()},{passive:true});
 document.body.style.paddingBottom='68px';
 })();
+
+/* Original seal geometry, switched by device appearance. */
+(function(){const dark=window.matchMedia("(prefers-color-scheme:dark)");function swap(){document.querySelectorAll("img").forEach(im=>{if(im.getAttribute("src")===HECH||im.dataset.belzSeal){im.dataset.belzSeal="1";im.src=dark.matches?"/brand/belz/belz/belz-seal-white-on-black.svg":"/brand/belz/belz/belz-seal-on-white.svg";im.style.background=dark.matches?"#000":"#fff";}})}swap();dark.addEventListener("change",swap);})();
