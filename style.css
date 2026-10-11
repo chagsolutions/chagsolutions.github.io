@@ -108,3 +108,7 @@ input[type=checkbox]:checked{border-color:#ff7800!important;background-color:#ff
 input[type=checkbox]:focus-visible{outline:2px solid #ff7800!important;outline-offset:3px!important}
 input[type=checkbox]:disabled{opacity:.55;cursor:default}
 label:has(>input[type=checkbox]){display:inline-flex!important;align-items:center!important;gap:10px!important;line-height:24px!important;text-align:left}
+
+/* Prefix/suffix and value share one field focus ring, never an inner input ring. */
+.value-control:focus-within,.ad-name-input:focus-within{outline:2px solid #ff7800!important;outline-offset:3px!important}
+.value-control input:focus,.value-control input:focus-visible,.ad-name-input input:focus,.ad-name-input input:focus-visible{outline:none!important;box-shadow:none!important}
