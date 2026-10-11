@@ -101,3 +101,10 @@ textarea{box-sizing:border-box;border-radius:14px;line-height:1.5}
 #module-form>.actions{margin-top:12px}
 #module-form>.actions>.btn{margin:0!important}
 .manual-payment-fields button{margin-bottom:0!important}
+
+/* One checkbox appearance across all CHAG forms, independent of browser defaults. */
+input[type=checkbox]{-webkit-appearance:none!important;appearance:none!important;box-sizing:border-box!important;display:inline-block!important;flex:0 0 20px!important;width:20px!important;min-width:20px!important;max-width:20px!important;height:20px!important;min-height:20px!important;padding:0!important;margin:0!important;vertical-align:middle!important;border:2px solid #888!important;border-radius:4px!important;background:transparent!important;cursor:pointer;accent-color:#ff7800}
+input[type=checkbox]:checked{border-color:#ff7800!important;background-color:#ff7800!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m4 10 4 4 8-9' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")!important;background-size:16px 16px!important;background-position:center!important;background-repeat:no-repeat!important}
+input[type=checkbox]:focus-visible{outline:2px solid #ff7800!important;outline-offset:3px!important}
+input[type=checkbox]:disabled{opacity:.55;cursor:default}
+label:has(>input[type=checkbox]){display:inline-flex!important;align-items:center!important;gap:10px!important;line-height:24px!important;text-align:left}
