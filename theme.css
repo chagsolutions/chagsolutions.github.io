@@ -49,3 +49,31 @@ html .cl b{color:#ff7800}
 /* Seal artwork carries its matching background; no client recoloring. */
 html #hbar .ap img{background:#000}
 @media(prefers-color-scheme:light){html #hbar .ap img{background:#fff}}
+
+/* Shared control scale: one action height, one field height, one spacing rhythm. */
+:root{--chag-action-h:48px;--chag-field-h:50px;--chag-gap:12px;--o:#ff7800}
+.btn,.btn.small,.btn.big,.method,.checkout-jump{box-sizing:border-box!important;display:inline-flex!important;align-items:center;justify-content:center;gap:8px;height:48px!important;min-height:48px!important;padding:0 24px!important;border-radius:999px!important;font-size:16px!important;line-height:20px!important;vertical-align:middle;max-width:100%;text-align:center}
+.btn:not(.ghost):not(.off):not(:disabled):not([aria-disabled="true"]){background:#ff7800;color:#000;border-color:#ff7800}
+.btn+.btn{margin-left:12px!important}
+.actions,.toolbar,.filters,.statusline,.buttons,.cta,.manual-methods,.methods{display:flex;flex-wrap:wrap;align-items:center;gap:12px!important}
+.actions>.btn,.toolbar>.btn,.filters>.btn,.statusline>.btn,.buttons>.btn,.cta>.btn,.manual-methods>.btn,.methods>.method{margin:0!important}
+.toolbar{align-items:flex-end}
+.card.panel>.btn,form.card.panel>button[type=submit],form.card.panel>button:last-child{margin-top:12px;margin-bottom:0}
+.card.panel>.btn+.btn,form.card.panel>button[type=submit]+button,form.card.panel>button:last-child{margin-top:12px}
+input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=range]):not([type=color]):not([type=file]),select:not([multiple]):not([size]),.stripe-field,.manual-secure{box-sizing:border-box!important;height:50px!important;min-height:50px!important;border-radius:14px!important;padding:14px!important;font-size:16px!important;line-height:20px!important;min-width:0}
+textarea{box-sizing:border-box;border-radius:14px;line-height:1.5}
+.value-control{box-sizing:border-box;height:50px;min-height:50px;border-radius:14px}
+.value-control input{height:48px!important;min-height:48px!important;padding:0!important;border-radius:0!important}
+.qty{display:flex;align-items:center;gap:12px!important}.qty button{box-sizing:border-box;width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;border-radius:999px!important;display:inline-flex;align-items:center;justify-content:center;padding:0!important;line-height:1;font-size:22px}
+.card,.panel,.cartbox,.prod,.payment-panel{border-radius:20px}
+.payment .method,.manual-methods .btn{margin-top:0!important;margin-bottom:0!important}.payment .methods{align-items:center}
+.manual-payment-fields .manual-pair{align-items:start}
+.formgrid,.field-row,.address-row,.manual-pair,.manual-address,.pair,.triple{gap:12px!important;align-items:start}
+@media(max-width:480px){.btn,.btn.small,.btn.big,.method{padding-left:18px!important;padding-right:18px!important}}
+/* Keep conditional controls hidden and nested action rows on one baseline. */
+[hidden]{display:none!important}
+.actions>.toolbar{display:contents}
+.status-card{border-radius:20px!important}
+#module-form>.actions{margin-top:12px}
+#module-form>.actions>.btn{margin:0!important}
+.manual-payment-fields button{margin-bottom:0!important}
