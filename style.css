@@ -112,3 +112,7 @@ label:has(>input[type=checkbox]){display:inline-flex!important;align-items:cente
 /* Prefix/suffix and value share one field focus ring, never an inner input ring. */
 .value-control:focus-within,.ad-name-input:focus-within{outline:2px solid #ff7800!important;outline-offset:3px!important}
 .value-control input:focus,.value-control input:focus-visible,.ad-name-input input:focus,.ad-name-input input:focus-visible{outline:none!important;box-shadow:none!important}
+
+/* Quantity controls: orange ring only while tappable. */
+.qty button:not(:disabled){border-color:#ff7800!important;color:var(--ink,#ededed)!important;background:transparent!important}.qty button:disabled,.qty.off button{border-color:#888!important;color:#888!important;background:transparent!important;cursor:default;opacity:1!important}
+@media(prefers-color-scheme:light){.qty button:not(:disabled){color:#181818!important}}
