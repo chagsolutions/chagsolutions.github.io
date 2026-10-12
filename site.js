@@ -22,4 +22,6 @@ document.body.style.paddingBottom='68px';
 })();
 
 /* Original seal geometry, switched by device appearance. */
-(function(){const dark=window.matchMedia("(prefers-color-scheme:dark)");function swap(){document.querySelectorAll("img").forEach(im=>{if(im.getAttribute("src")===HECH||im.dataset.belzSeal){im.dataset.belzSeal="1";im.src=dark.matches?"/brand/belz/belz/belz-seal-white-on-black.svg":"/brand/belz/belz/belz-seal-on-white.svg";im.style.background=dark.matches?"#000":"#fff";}})}swap();dark.addEventListener("change",swap);})();
+(function(){const dark=window.matchMedia("(prefers-color-scheme:dark)");function swap(){document.querySelectorAll("img").forEach(im=>{if(im.getAttribute("src")===HECH||im.dataset.belzSeal){im.dataset.belzSeal="1";im.src=dark.matches?"/brand/belz/belz/belz-seal-on-white.svg":"/brand/belz/belz/belz-seal-white-on-black.svg";im.style.background="transparent";}})}swap();dark.addEventListener("change",swap);})();
+
+(function(){const dark=matchMedia("(prefers-color-scheme:dark)");function apply(){const box=document.querySelector("#hbigw div");if(box)box.style.background=dark.matches?"#0d0d0d":"#fff";}apply();dark.addEventListener("change",apply);})();
