@@ -1,3 +1,4 @@
+@import url("/button-system.css?v=1");
 @import url("theme.css");
 :root{--o:#ff7800;--k:#0d0d0d;--k2:#171717;--w:#fff;--g:#b8b8b8}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
