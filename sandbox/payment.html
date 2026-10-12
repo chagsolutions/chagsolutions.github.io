@@ -187,7 +187,7 @@ const cardNumber=cardElements.create('cardNumber',{style});cardNumber.mount('#st
 cardElements.create('cardExpiry',{style}).mount('#stripe-card-expiry');cardElements.create('cardCvc',{style}).mount('#stripe-card-cvc');
 let bankElements,bankGeneration=0;
 const sameAchPerson=document.getElementById('same-ach-person');
-function achPerson(){return sameAchPerson.checked?{name:[order.firstName,order.lastName].join(' ').trim(),email:order.email}:{name:document.getElementById('ach-name').value.trim(),email:document.getElementById('ach-email').value.trim()}}
+function achPerson(){order.email=document.getElementById('test-recipient').value.trim().toLowerCase();return sameAchPerson.checked?{name:[order.firstName,order.lastName].join(' ').trim(),email:order.email}:{name:document.getElementById('ach-name').value.trim(),email:document.getElementById('ach-email').value.trim()}}
 sameAchPerson.onchange=()=>{document.getElementById('ach-person-override').hidden=sameAchPerson.checked;if(!sameAchPerson.checked){document.getElementById('ach-name').value='';document.getElementById('ach-email').value=''}};
 async function testIntent(method){
  order.email=document.getElementById('test-recipient').value.trim().toLowerCase();if(!order.email)throw Error('Enter the approved test receipt email.');
@@ -198,13 +198,14 @@ const r=await fetch(sandboxEndpoint+'/intent',{method:'POST',headers:{'Content-T
 function resetBank(){bankGeneration++;bankElements?.getElement('payment')?.destroy();bankElements=null;document.getElementById('ach-test-submit').disabled=true;document.getElementById('ach-test-status').textContent=''};document.getElementById('apply').addEventListener('click',()=>{resetBank();if(selectedMethod==='ach')loadBank()});document.getElementById('payment-promo').addEventListener('input',resetBank);
 const displayStatus=async(id,pi)=>{
  const response=await fetch(sandboxEndpoint+'/status',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({clientSecret:pi.client_secret})});
- const state=await response.json();if(!response.ok||!state.sandbox)throw Error(state.error||'Unable to verify payment state.');
+ let state=await response.json();if(!response.ok||!state.sandbox)throw Error(state.error||'Unable to verify payment state.');
+ for(let checks=0;state.status==='succeeded'&&!state.page&&!state.expired&&checks<6;checks++){document.getElementById(id).textContent='Payment received by Stripe. Confirming your order...';await new Promise(resolve=>setTimeout(resolve,1500));const retry=await fetch(sandboxEndpoint+'/status',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({clientSecret:pi.client_secret})});const next=await retry.json();if(!retry.ok||!next.sandbox)throw Error(next.error||'Unable to verify payment state.');state=next;}
  if(state.page){
   const completion={...state,amount:state.amount/100,at:Date.now()};
   sessionStorage.setItem('chagSandboxCompletion',JSON.stringify(completion));
   sessionStorage.removeItem('chagSandboxOrder');
   location.replace(state.page==='success'?'success.html':'pending.html');
- }else document.getElementById(id).textContent='Test payment status: '+state.status+'. No completion confirmed. Isolated test order only.';
+ }else document.getElementById(id).textContent=state.status==='succeeded'?'Stripe received the test payment. Your order confirmation is still pending. Do not pay again.':'Test payment status: '+state.status+'. No completion confirmed. Isolated test order only.';
 };
 window.addEventListener('pageshow',()=>{const raw=sessionStorage.getItem('chagSandboxCompletion');if(raw){const c=JSON.parse(raw);location.replace((c.page|| (c.status==='succeeded'?'success':'pending'))==='success'?'success.html':'pending.html')}});
 const returnedSecret=new URLSearchParams(location.search).get('payment_intent_client_secret');
