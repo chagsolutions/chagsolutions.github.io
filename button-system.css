@@ -6,3 +6,5 @@ html body #stripe-apple-element{box-sizing:border-box;height:var(--btn-h)!import
 html body #stripe-apple-element>div,html body #stripe-apple-element iframe{height:calc(var(--btn-h) - 2 * var(--btn-border))!important;min-height:0!important;max-height:calc(var(--btn-h) - 2 * var(--btn-border))!important;display:block!important}
 html body #cashapp-test-submit{border-width:var(--btn-border)!important}
 @media(prefers-color-scheme:light){html body #stripe-apple-element{border-color:#333;background:#fff}}
+/* Explicit display rules must never unhide workflow controls. */
+html body button[hidden],html body .btn[hidden],html body .method[hidden],html body .checkout-jump[hidden],html body .payment-panel[hidden]{display:none!important}
