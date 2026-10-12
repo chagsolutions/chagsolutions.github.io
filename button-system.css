@@ -1,0 +1,8 @@
+/* CHAG single action-height source. Wallet APIs read --btn-h at mount. */
+:root{--btn-h:48px;--btn-radius:999px;--btn-border:2px}
+html body button:not(.card):not(.orderrow):not([role="option"]),html body a.btn,html body .btn,html body .method,html body .checkout-jump{box-sizing:border-box!important;height:var(--btn-h)!important;min-height:var(--btn-h)!important;max-height:var(--btn-h)!important;padding-top:0!important;padding-bottom:0!important;align-items:center;justify-content:center}
+html body .btn,html body .method,html body .checkout-jump{display:inline-flex!important;border-width:var(--btn-border)!important}
+html body #stripe-apple-element{box-sizing:border-box;height:var(--btn-h)!important;min-height:var(--btn-h)!important;max-height:var(--btn-h)!important;outline:0!important;border:var(--btn-border) solid #888;border-radius:var(--btn-radius);background:#000;overflow:hidden;padding:0}
+html body #stripe-apple-element>div,html body #stripe-apple-element iframe{height:calc(var(--btn-h) - 2 * var(--btn-border))!important;min-height:0!important;max-height:calc(var(--btn-h) - 2 * var(--btn-border))!important;display:block!important}
+html body #cashapp-test-submit{border-width:var(--btn-border)!important}
+@media(prefers-color-scheme:light){html body #stripe-apple-element{border-color:#333;background:#fff}}
