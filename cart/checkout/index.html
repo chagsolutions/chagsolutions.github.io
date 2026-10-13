@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><base href="/"><link rel="canonical" href="https://chagsolutions.com/cart/checkout/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Checkout - Chag Solutions</title><link rel="stylesheet" href="style.css"><style>
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.address-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+.form input{width:100%;min-width:0;box-sizing:border-box}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field label{font-size:14px;color:#ccc}
+@media(prefers-color-scheme:light){.field label{color:#444}}
+.form input:focus{outline:2px solid #FF7800;outline-offset:2px}
+@media(max-width:480px){.address-row{grid-template-columns:1fr 1fr}.city-field{grid-column:1/-1}.field-row{gap:10px}.form input{padding:13px;font-size:16px}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.field-error{display:block;color:#a83223;font-size:13px;margin-top:6px}
+.field-error[hidden],.sr-only[hidden]{display:none}
+.field input[aria-invalid="true"]{border-color:#a83223}
+.address-anchor{position:relative}
+.address-anchor input[aria-expanded="true"]{border-radius:16px 16px 0 0;border-bottom-color:transparent}
+.address-anchor .address-results{position:absolute;top:100%;left:0;right:0;z-index:20;margin:0;border-radius:0 0 16px 16px;border-top:0;box-shadow:0 10px 18px #0002}
+.address-anchor .address-results:empty{display:none}
+.address-option{line-height:1.4}
+.address-anchor .address-results{background:#161616;border-color:#333}
+@media(prefers-color-scheme:light){html .address-anchor .address-results{background:#fff;border-color:#bbb}}
+input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=range]):not([type=color]),select:not([multiple]):not([size]){box-sizing:border-box!important;height:50px!important;min-height:50px!important;border-radius:14px!important;padding:14px!important;font-size:16px!important;line-height:20px!important}
+#sb{width:100%}
+.osum-tot{border-top:1px solid #2a2a2a}
+@media(prefers-color-scheme:light){.osum-tot{border-top-color:#ddd}}
+</style><link rel="icon" type="image/svg+xml" href="favicon.svg"></head><body><header id="hdr"></header><main><section style="padding-top:40px"><div class="wrap"><h1 style="font-size:clamp(34px,6vw,60px);margin:0;font-weight:900;text-transform:uppercase">Checkout</h1>
+<p class="lead">Where should we send your order?</p>
+<div class="cartbox" style="margin:10px 0 40px;max-width:640px">
+<div id="osum" style="margin-bottom:18px"></div>
+<form novalidate id="of" class="form"><div class="field-row"><div class="field"><label for="first">First name</label><input id="first" name="firstName" required autocomplete="given-name"></div><div class="field"><label for="last">Last name</label><input id="last" name="lastName" required autocomplete="family-name"></div></div>
+<div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" inputmode="tel" aria-describedby="phone-error" required autocomplete="tel"><span class="field-error" id="phone-error" aria-live="polite" hidden>Invalid phone number</span></div>
+<div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-error"><span class="field-error" id="email-error" aria-live="polite" hidden>Invalid email address</span></div>
+<div class="field"><label for="street">Street address</label><input id="street" name="street" required autocomplete="address-line1"></div>
+<div class="address-row"><div class="field city-field"><label for="city">City</label><input id="city" name="city" required autocomplete="address-level2"></div><div class="field"><label for="state">State</label><input id="state" name="state" required autocomplete="address-level1"></div><div class="field"><label for="zip">ZIP code</label><input id="zip" name="zip" required autocomplete="postal-code" inputmode="numeric"></div></div>
+<button class="btn big" id="sb" type="submit">Proceed to Payment</button></form>
+<div id="empty-note" hidden><p class="lead">Your cart is empty.</p><a class="btn" href="/shop/">Browse the shop</a></div>
+</div>
+<a class="back" href="/cart/">&larr; Back to cart</a>
+</div></section></main><footer id="ftr"></footer><script src="site.js"></script><script src="shop/shop-core.js"></script><script>
+const S=window.CHAGShop,$=s=>document.querySelector(s);let PS=[];
+function calc(){return S.calc(PS,window.CHAGCart.read())}
+function summary(){const c=calc();const el=document.getElementById('osum');
+ if(!PS.length||!c.lines.length){el.innerHTML='';return}
+ el.innerHTML=c.lines.map(l=>`<div style="display:flex;justify-content:space-between;padding:6px 0;font-size:15px"><span>${S.esc(l.p.name)} <b>x ${l.q}</b></span><span>${S.money(l.q*l.u)}</span></div>`).join('')+`<div class="osum-tot" style="display:flex;justify-content:space-between;padding:10px 0 0;font-weight:800;margin-top:6px"><span>Total</span><span>${S.money(c.tot)}</span></div>`}
+function guard(){const empty=PS.length&&!calc().lines.length;document.getElementById('of').style.display=empty?'none':'';document.getElementById('empty-note').hidden=!empty}
+const phoneInput=document.getElementById('phone'),emailInput=document.getElementById('email');
+function phoneDigits(value){const digits=value.replace(/\D/g,'');return digits.length===11&&digits[0]==='1'?digits.slice(1):digits}
+function formatPhone(value){if(!/^[+()\d\s.-]*$/.test(value))return value;const raw=value.replace(/\D/g,'');const prefix=/^\+1/.test(value.trim());const d=prefix?raw.slice(1):phoneDigits(value);if(d.length>10)return value;const formatted=[d.slice(0,3),d.slice(3,6),d.slice(6)].filter(Boolean).join('-');return (prefix?'+1 ':'')+formatted}
+function checkContact(input,show){const value=input.value.trim();const valid=input===phoneInput?/^[2-9]\d{2}[2-9]\d{6}$/.test(phoneDigits(value))&&/^[+()\d\s.-]*$/.test(value):/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)&&!input.validity.typeMismatch;input.setCustomValidity(valid?'':input===phoneInput?'Invalid phone number':'Invalid email address');const visible=show&&!valid;input.setAttribute('aria-invalid',String(visible));document.getElementById(input.id+'-error').hidden=!visible;return valid}
+phoneInput.addEventListener('input',()=>{const pos=phoneInput.selectionStart;const count=phoneInput.value.slice(0,pos).replace(/\D/g,'').length;const atEnd=pos===phoneInput.value.length;phoneInput.value=formatPhone(phoneInput.value);let caret=0,n=0;while(caret<phoneInput.value.length&&n<count){if(/\d/.test(phoneInput.value[caret]))n++;caret++}phoneInput.setSelectionRange(atEnd?phoneInput.value.length:caret,atEnd?phoneInput.value.length:caret);checkContact(phoneInput,phoneInput.getAttribute('aria-invalid')==='true')});
+emailInput.addEventListener('input',()=>checkContact(emailInput,emailInput.getAttribute('aria-invalid')==='true'));
+[phoneInput,emailInput].forEach(input=>{input.addEventListener('blur',()=>checkContact(input,true));input.addEventListener('invalid',e=>{e.preventDefault();checkContact(input,true)})});
+
+
+
+const requiredOrderFields={first:'First name',last:'Last name',phone:'Phone number',email:'Email address',street:'Street address',city:'City',state:'State',zip:'ZIP code'};
+const orderErrors=document.createElement('div');orderErrors.id='order-errors';orderErrors.className='sr-only';orderErrors.setAttribute('role','alert');orderErrors.hidden=true;document.getElementById('sb').before(orderErrors);
+Object.entries(requiredOrderFields).forEach(([id,label])=>{const input=document.getElementById(id);input.required=true;input.addEventListener('input',()=>{if(!orderErrors.hidden)validateOrderFields(false)});if(!document.getElementById(id+'-error')){const error=document.createElement('span');error.id=id+'-error';error.className='field-error';error.hidden=true;input.after(error)}input.setAttribute('aria-describedby',id+'-error')});
+function validateOrderFields(focus=true){let messages=[],firstBad;Object.entries(requiredOrderFields).forEach(([id,label])=>{const input=document.getElementById(id),error=document.getElementById(id+'-error');let text='';if(!input.value.trim())text='Enter '+label.toLowerCase()+'.';else if(id==='phone'&&!checkContact(input,false))text='Enter a valid phone number.';else if(id==='email'&&!checkContact(input,false))text='Enter a valid email address.';error.textContent=text;error.hidden=!text;input.setAttribute('aria-invalid',String(!!text));input.setCustomValidity(text);if(text){messages.push(text);if(!firstBad)firstBad=input}});orderErrors.textContent=messages.length?'Complete all fields to place your order: '+messages.join(' '):'';orderErrors.hidden=!messages.length;if(firstBad&&focus){firstBad.focus();firstBad.scrollIntoView({block:'center',behavior:'smooth'})}return !messages.length}
+
+// No order is sent and no payment is collected until the payment service is connected.
+$('#of').addEventListener('submit',e=>{e.preventDefault();
+ const c=calc();if(!c.lines.length||!validateOrderFields())return;
+ const f=new FormData(e.target);
+ const order={promo:null,lines:c.lines.map(l=>({name:l.p.name,q:l.q,u:l.u,regularPrice:l.p.price,product_id:l.p.uuid})),tot:c.tot,save:c.save,firstName:f.get('firstName'),lastName:f.get('lastName'),phone:f.get('phone'),email:f.get('email'),street:f.get('street'),city:f.get('city'),state:f.get('state'),zip:f.get('zip')};
+ try{sessionStorage.removeItem('chagShopCompletion');sessionStorage.removeItem('chagShopAttempt');sessionStorage.setItem('chagShopOrder',JSON.stringify(order))}catch(err){alert('Please allow session storage to continue to the next page.');return}
+ location.href='/shop/payment/';
+});
+S.loadCatalog().then(ps=>{PS=ps;summary();guard()}).catch(()=>{});
+window.addEventListener('chag-cart',()=>{summary();guard()});
+</script><script src="shop/address.js"></script></body></html>
