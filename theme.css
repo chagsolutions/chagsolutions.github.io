@@ -35,7 +35,7 @@ html:root{color-scheme:dark}
   /* Keep the seal on white so its lettering is readable in either appearance. */
   html #hbar .ap img{background:#fff;border-radius:5px}
   /* Orange stays the exact brand color in both appearances. */
-  html .hero h1 em,html h2 em,html .page h1 em,html .card .n,html .prod .pr,html .sp,html .cartbox em,html .svl,html .svl .good,html .back,html .cl b,html .opc .st,html .opc.soon .btn,html header nav a.on,html header nav a:hover,html #hbar .ap span{color:#ff7800!important}
+  html .hero h1 em,html h2 em,html .page h1 em,html .card .n,html .prod .pr,html .sp,html .cartbox em,html .svl,html .svl .good,html .cl b,html .opc .st,html header nav a.on,html header nav a:hover,html #hbar .ap span{color:#ff7800!important}
   html .btn.ghost:hover{color:#ff7800}
 }
 @media(prefers-color-scheme:light){
