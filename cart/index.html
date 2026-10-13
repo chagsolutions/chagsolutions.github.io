@@ -1,16 +1,19 @@
 <!doctype html><html lang="en"><head><base href="/"><link rel="canonical" href="https://chagsolutions.com/cart/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cart - Chag Solutions</title><meta name="description" content="Your Chag Solutions cart."><link rel="stylesheet" href="style.css"><style>
 .cl{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;font-size:18px;border-bottom:1px solid #2a2a2a}
+.ttrow{display:flex;justify-content:space-between;font-size:16px;padding:12px 0;border-bottom:1px solid #2a2a2a}
+#cartbox .tt{font-size:16px;font-weight:800;padding:12px 0 4px}
 .cl .nm{min-width:0;flex:1}
 .cl .nm .unit{font-size:13px;opacity:.65;font-weight:400;margin-top:2px}
 .cl .amt{font-weight:700;white-space:nowrap}
 .qty button:disabled{border-color:#6b6b6b;color:#6b6b6b;cursor:not-allowed}
-@media(prefers-color-scheme:light){.cl{border-bottom-color:#ddd}}
+@media(prefers-color-scheme:light){.cl,.ttrow{border-bottom-color:#ddd}}
 #checkout{width:100%;text-align:center;margin-top:18px;box-sizing:border-box}
 </style><link rel="icon" type="image/svg+xml" href="favicon.svg"></head><body><header id="hdr"></header><main><section style="padding-top:40px"><div class="wrap"><h1 style="font-size:clamp(34px,6vw,60px);margin:0;font-weight:900;text-transform:uppercase">Cart</h1>
 <div id="cartbox" class="cartbox" style="margin:24px 0 40px;max-width:640px" hidden>
 <div id="cl"></div>
+<div class="ttrow"><span>Subtotal</span><b id="sub"></b></div>
+<div class="ttrow" id="disc" hidden><span>Discount</span><b id="damt"></b></div>
 <div class="tt"><span>Total</span><b id="tot"></b></div>
-<div id="sv" class="svl"></div>
 <a class="btn big" id="checkout" href="/cart/checkout/">Checkout</a>
 </div>
 <div id="emptybox" class="cartempty" hidden><p class="lead" style="margin:0 auto 22px">Your cart is empty.</p><a class="btn" href="/shop/">Browse the shop</a></div>
@@ -23,8 +26,10 @@ function render(){
  if(!c.lines.length){box.hidden=true;empty.hidden=false;return}
  box.hidden=false;empty.hidden=true;
  document.getElementById('cl').innerHTML=c.lines.map(l=>`<div class="cl"><div class="nm"><b>${S.esc(l.p.name)}</b><div class="unit">${S.money(l.u)} each</div></div><div class="qty big"><button type="button" data-dec="${S.esc(l.p.id)}" aria-label="Less">-</button><span>${l.q}</span><button type="button" data-inc="${S.esc(l.p.id)}" ${l.q>=l.p.maxQuantity?'disabled':''} aria-label="More">+</button></div><div class="amt">${S.money(l.q*l.u)}</div></div>`).join('');
+ document.getElementById('sub').textContent=S.money(c.base);
+ const disc=document.getElementById('disc');
+ if(c.save>0){disc.hidden=false;document.getElementById('damt').textContent='-'+S.money(c.save)}else{disc.hidden=true}
  document.getElementById('tot').textContent=S.money(c.tot);
- document.getElementById('sv').textContent=c.save>0?'You save '+S.money(c.save):'';
 }
 document.addEventListener('click',e=>{const t=e.target;
  if(t.dataset.inc&&!t.disabled){const p=PS.find(x=>x.id===t.dataset.inc);if(!p)return;const q=window.CHAGCart.read()[p.id]||0;if(q<p.maxQuantity)window.CHAGCart.set(p.id,q+1);return}
