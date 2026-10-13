@@ -11,6 +11,14 @@
 .field-error{display:block;color:#a83223;font-size:13px;margin-top:6px}
 .field-error[hidden],.sr-only[hidden]{display:none}
 .field input[aria-invalid="true"]{border-color:#a83223}
+.address-results:empty{display:none}
+.address-results{background:#222;border:1px solid #555;border-radius:12px;overflow:hidden;margin-top:3px}
+.address-option{width:100%;background:none;border:0;border-bottom:1px solid #444;text-align:left;color:#fff;padding:12px;font:inherit;cursor:pointer}
+.address-option:hover,.address-option.selected{background:#444}
+.address-credit{font-size:12px;color:#888;margin:0}
+.address-credit a{color:#aaa;text-decoration:underline}
+.dropdown-credit{padding:9px 12px;background:#181818;font-size:12px;line-height:1.4;color:#aaa}
+.dropdown-credit a{color:#aaa;text-decoration:underline}
 .address-anchor{position:relative}
 .address-anchor input[aria-expanded="true"]{border-radius:16px 16px 0 0;border-bottom-color:transparent}
 .address-anchor .address-results{position:absolute;top:100%;left:0;right:0;z-index:20;margin:0;border-radius:0 0 16px 16px;border-top:0;box-shadow:0 10px 18px #0002}
@@ -22,7 +30,8 @@ input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=range]
 #sb{width:100%}
 .osum-tot{border-top:1px solid #2a2a2a}
 @media(prefers-color-scheme:light){.osum-tot{border-top-color:#ddd}}
-</style><link rel="icon" type="image/svg+xml" href="favicon.svg"></head><body><header id="hdr"></header><main><section style="padding-top:40px"><div class="wrap"><h1 style="font-size:clamp(34px,6vw,60px);margin:0;font-weight:900;text-transform:uppercase">Checkout</h1>
+</style><link rel="icon" type="image/svg+xml" href="favicon.svg"></head><body><header id="hdr"></header><main><section style="padding-top:40px"><div class="wrap"><a class="back" href="/cart/" style="display:inline-block;margin-bottom:18px">&larr; Back to cart</a>
+<h1 style="font-size:clamp(34px,6vw,60px);margin:0;font-weight:900;text-transform:uppercase">Checkout</h1>
 <p class="lead">Where should we send your order?</p>
 <div class="cartbox" style="margin:10px 0 40px;max-width:640px">
 <div id="osum" style="margin-bottom:18px"></div>
@@ -34,7 +43,6 @@ input:not([type=checkbox]):not([type=radio]):not([type=hidden]):not([type=range]
 <button class="btn big" id="sb" type="submit">Proceed to Payment</button></form>
 <div id="empty-note" hidden><p class="lead">Your cart is empty.</p><a class="btn" href="/shop/">Browse the shop</a></div>
 </div>
-<a class="back" href="/cart/">&larr; Back to cart</a>
 </div></section></main><footer id="ftr"></footer><script src="site.js"></script><script src="shop/shop-core.js"></script><script>
 const S=window.CHAGShop,$=s=>document.querySelector(s);let PS=[];
 function calc(){return S.calc(PS,window.CHAGCart.read())}
@@ -63,7 +71,7 @@ $('#of').addEventListener('submit',e=>{e.preventDefault();
  const f=new FormData(e.target);
  const order={promo:null,lines:c.lines.map(l=>({name:l.p.name,q:l.q,u:l.u,regularPrice:l.p.price,product_id:l.p.uuid})),tot:c.tot,save:c.save,firstName:f.get('firstName'),lastName:f.get('lastName'),phone:f.get('phone'),email:f.get('email'),street:f.get('street'),city:f.get('city'),state:f.get('state'),zip:f.get('zip')};
  try{sessionStorage.removeItem('chagShopCompletion');sessionStorage.removeItem('chagShopAttempt');sessionStorage.setItem('chagShopOrder',JSON.stringify(order))}catch(err){alert('Please allow session storage to continue to the next page.');return}
- location.href='/shop/payment/';
+ location.href='/cart/checkout/payment/';
 });
 S.loadCatalog().then(ps=>{PS=ps;summary();guard()}).catch(()=>{});
 window.addEventListener('chag-cart',()=>{summary();guard()});
