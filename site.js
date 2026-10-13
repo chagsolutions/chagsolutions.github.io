@@ -8,13 +8,13 @@ window.CHAGCart=(function(){
  const read=()=>{try{const c=JSON.parse(localStorage.getItem(KEY));return c&&typeof c==='object'?c:{}}catch(e){return{}}};
  const count=c=>Object.values(c||read()).reduce((a,b)=>a+(+b||0),0);
  const paint=()=>{const n=count();document.querySelectorAll('.cart-n').forEach(b=>{b.textContent=n;b.hidden=n===0});};
- const write=c=>{try{localStorage.setItem(KEY,JSON.stringify(c))}catch(e){}paint();window.dispatchEvent(new Event('chag-cart'));};
+ const write=c=>{try{localStorage.setItem(KEY,JSON.stringify(c))}catch(e){}if(!count(c)){try{localStorage.removeItem('chagCheckoutV1')}catch(e){}}paint();window.dispatchEvent(new Event('chag-cart'));};
  return{
   read,count,
   set(id,q){const c=read();q=Math.max(0,+q||0);if(q) c[id]=q;else delete c[id];write(c);},
   inc(id,max){const c=read();const q=(+c[id]||0)+1;if(max!=null&&q>max)return;c[id]=q;write(c);},
   dec(id){const c=read();const q=(+c[id]||0)-1;if(q>0)c[id]=q;else delete c[id];write(c);},
-  clear(){try{localStorage.removeItem(KEY)}catch(e){}paint();window.dispatchEvent(new Event('chag-cart'));},
+  clear(){try{localStorage.removeItem(KEY);localStorage.removeItem('chagCheckoutV1')}catch(e){}paint();window.dispatchEvent(new Event('chag-cart'));},
   paint
  };
 })();
