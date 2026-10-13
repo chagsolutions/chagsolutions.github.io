@@ -65,6 +65,17 @@ const orderErrors=document.createElement('div');orderErrors.id='order-errors';or
 Object.entries(requiredOrderFields).forEach(([id,label])=>{const input=document.getElementById(id);input.required=true;input.addEventListener('input',()=>{if(!orderErrors.hidden)validateOrderFields(false)});if(!document.getElementById(id+'-error')){const error=document.createElement('span');error.id=id+'-error';error.className='field-error';error.hidden=true;input.after(error)}input.setAttribute('aria-describedby',id+'-error')});
 function validateOrderFields(focus=true){let messages=[],firstBad;Object.entries(requiredOrderFields).forEach(([id,label])=>{const input=document.getElementById(id),error=document.getElementById(id+'-error');let text='';if(!input.value.trim())text='Enter '+label.toLowerCase()+'.';else if(id==='phone'&&!checkContact(input,false))text='Enter a valid phone number.';else if(id==='email'&&!checkContact(input,false))text='Enter a valid email address.';error.textContent=text;error.hidden=!text;input.setAttribute('aria-invalid',String(!!text));input.setCustomValidity(text);if(text){messages.push(text);if(!firstBad)firstBad=input}});orderErrors.textContent=messages.length?'Complete all fields to place your order: '+messages.join(' '):'';orderErrors.hidden=!messages.length;if(firstBad&&focus){firstBad.focus();firstBad.scrollIntoView({block:'center',behavior:'smooth'})}return !messages.length}
 
+// Contact info is kept while the cart has items, so leaving and coming back keeps the form filled.
+(function(){
+ const CF='chagCheckoutV1',F=['firstName','lastName','phone','email','street','city','state','zip'],form=document.getElementById('of');
+ try{
+  if(window.CHAGCart&&CHAGCart.count()===0){localStorage.removeItem(CF);return;}
+  const o=JSON.parse(localStorage.getItem(CF)||'null');
+  if(o)F.forEach(n=>{const el=form.elements[n];if(el&&o[n]!=null)el.value=o[n];});
+  form.addEventListener('input',()=>{const d={};F.forEach(n=>{const el=form.elements[n];if(el)d[n]=el.value;});try{localStorage.setItem(CF,JSON.stringify(d))}catch(e){}});
+ }catch(e){}
+})();
+
 // No order is sent and no payment is collected until the payment service is connected.
 $('#of').addEventListener('submit',e=>{e.preventDefault();
  const c=calc();if(!c.lines.length||!validateOrderFields())return;
