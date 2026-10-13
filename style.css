@@ -117,3 +117,35 @@ label:has(>input[type=checkbox]){display:inline-flex!important;align-items:cente
 /* Quantity controls: orange ring only while tappable. */
 .qty button:not(:disabled){border-color:#ff7800!important;color:var(--ink,#ededed)!important;background:transparent!important}.qty button:disabled,.qty.off button{border-color:#888!important;color:#888!important;background:transparent!important;cursor:default;opacity:1!important}
 @media(prefers-color-scheme:light){.qty button:not(:disabled){color:#181818!important}}
+
+/* cart icon in header */
+header .wrap{position:relative}
+header nav{position:absolute;left:50%;transform:translateX(-50%)}
+header .cart-link{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-height:44px;border-radius:999px;position:relative;color:inherit;flex:0 0 auto}
+header .cart-link:hover,header .cart-link.on{color:var(--o)}
+header .cart-link svg{width:24px;height:24px;display:block}
+header .cart-n{position:absolute;top:1px;right:-1px;background:var(--o);color:#000;font-size:11px;font-weight:900;min-width:18px;height:18px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;line-height:1}
+@media(max-width:380px){header nav a{font-size:10px}header nav{gap:8px}}
+
+/* cart page */
+.cartempty{text-align:center;padding:40px 0}
+.cartempty .lead{margin:0 0 22px}
+
+/* product page */
+.prodview{max-width:720px;padding-top:40px}
+.prodview .back{display:inline-block;margin-bottom:18px}
+.prodview .prod{display:block;cursor:default}
+.prodview .prod h1{margin:0 0 4px}
+.prodview .price-note{font-size:12px;opacity:.65;margin:-2px 0 0}
+.prodview .status{font-weight:700;margin:10px 0 0}
+.prodview .qty{margin-top:14px}
+.prod[data-link]{cursor:pointer}
+.back{color:inherit;opacity:.8;font-size:14px}
+.back:hover{color:var(--o);opacity:1}
+
+/* product photo + status (shared by shop grid and product pages) */
+.product-photo{width:100%;aspect-ratio:1600/1156;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#777}
+.prod .product-photo img{display:block;width:100%;height:100%;aspect-ratio:1600/1156;object-fit:contain}
+.prod .product-photo.builtin img{padding:0 6%;box-sizing:border-box}
+.pr.soon-t{color:#b5b5b5;font-size:18px;font-weight:700;margin:10px 0 28px}
+.qty.off button{color:#6b6b6b;cursor:not-allowed}
