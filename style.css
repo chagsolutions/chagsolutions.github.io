@@ -121,6 +121,8 @@ label:has(>input[type=checkbox]){display:inline-flex!important;align-items:cente
 /* cart icon in header */
 header .wrap{position:relative}
 header nav{position:absolute;left:50%;transform:translateX(-50%)}
+header .hdr-logo{display:block;height:30px}
+@media(max-width:480px){header .hdr-logo{display:none}header nav{position:static;transform:none;margin-left:0}}
 header .cart-link{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-height:44px;border-radius:999px;position:relative;color:inherit;flex:0 0 auto}
 header .cart-link:hover,header .cart-link.on{color:var(--o)}
 header .cart-link svg{width:24px;height:24px;display:block}
@@ -138,6 +140,7 @@ header .cart-n{position:absolute;top:1px;right:-1px;background:var(--o);color:#0
 .prodview .prod h1{margin:0 0 4px}
 .prodview .price-note{font-size:12px;opacity:.65;margin:-2px 0 0}
 .prodview .status{font-weight:700;margin:10px 0 0}
+.prodview .writeup{margin-top:18px;border-top:1px solid #2a2a2a;padding-top:16px}
 .prodview .qty{margin-top:14px}
 .prod[data-link]{cursor:pointer}
 .back{color:inherit;opacity:.8;font-size:14px}
