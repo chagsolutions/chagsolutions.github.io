@@ -16,10 +16,11 @@
   const img=`<div class="product-photo ${builtin?'builtin':''}">${p.image?`<img src="${S.esc(p.image)}" alt="${S.esc(p.name)}">`:`<span>No photo yet</span>`}</div>`;
   const intro=(c.tagline?`<p class="tagline">${S.esc(c.tagline)}</p>`:'');
   const desc=(c.description?`<p class="desc">${S.esc(c.description)}</p>`:'');
+  const writeup=(c.writeup?`<div class="writeup">${String(c.writeup).split(/\n\s*\n/).map(x=>`<p>${S.esc(x.trim()).replace(/\n/g,'<br>')}</p>`).join('')}</div>`:'');
   const controls=p.orderable
    ?`<div class="pr">${S.money(p.price)} <small>${S.esc(c.price_note||'')}</small></div>${c.deal_text?`<div class="deal">${S.esc(c.deal_text)}</div>`:''}${p.available===false?`<p>${S.esc(c.out_of_stock_text||'Temporarily out of stock')}</p>`:''}<div class="qty big"><button type="button" data-pdec ${q===0?'disabled':''} aria-label="Less">-</button><span>${q}</span><button type="button" data-pinc ${p.available===false||q>=p.maxQuantity?'disabled':''} aria-label="More">+</button></div>`
    :`<div class="pr soon-t">${S.esc(c.status_text||S.STATUS_DEFAULT[p.status]||'Currently unavailable')}</div><div class="qty big off" aria-disabled="true"><button type="button" disabled aria-label="Less">-</button><span>0</span><button type="button" disabled aria-label="More">+</button></div>`;
-  host.innerHTML=`<a class="back" href="/shop/">&larr; Back to shop</a><div class="prod${p.orderable?'':' soon'}">${img}<div class="b"><h1 style="font-size:clamp(28px,5vw,44px);margin:0">${S.esc(p.name)}</h1>${intro}${controls}${desc}</div></div>`;
+  host.innerHTML=`<a class="back" href="/shop/">&larr; Back to shop</a><div class="prod${p.orderable?'':' soon'}">${img}<div class="b"><h1 style="font-size:clamp(28px,5vw,44px);margin:0">${S.esc(p.name)}</h1>${intro}${controls}${desc}${writeup}</div></div>`;
   document.title=p.name+' - Chag Solutions';
  }
  host.addEventListener('click',e=>{
