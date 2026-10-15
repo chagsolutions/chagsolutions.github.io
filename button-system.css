@@ -13,5 +13,5 @@ html body #chag-install-banner .chag-install-close{height:auto!important;min-hei
 html body #chag-install-banner button{height:auto!important;min-height:34px!important;max-height:none!important;padding:5px 10px!important}
 /* Ads reorder arrows keep their compact round shape. */
 html body .ad-arrows.ad-arrows{align-items:center}
-html body .ad-arrows .btn.btn.btn.btn{width:44px!important;min-width:44px!important;height:44px!important;min-height:44px!important;max-height:44px!important;padding:8px!important;background:transparent!important;border:2px solid #ff7800!important;color:#ededed!important}
-html body .ad-arrows .btn.btn.btn.btn:disabled{border-color:#888!important;color:#888!important;background:transparent!important;opacity:1!important}
+html body #workspace .ad-arrows .btn{width:44px!important;min-width:44px!important;height:44px!important;min-height:44px!important;max-height:44px!important;margin:0!important;padding:8px!important;background:transparent!important;border:2px solid #ff7800!important;color:#ededed!important}
+html body #workspace .ad-arrows .btn:disabled{border-color:#888!important;color:#888!important;background:transparent!important;opacity:1!important}
