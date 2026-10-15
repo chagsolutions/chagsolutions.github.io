@@ -8,3 +8,8 @@ html body #cashapp-test-submit{border-width:var(--btn-border)!important}
 @media(prefers-color-scheme:light){html body #stripe-apple-element{border-color:#333;background:#fff}}
 /* Explicit display rules must never unhide workflow controls. */
 html body button[hidden],html body .btn[hidden],html body .method[hidden],html body .checkout-jump[hidden],html body .payment-panel[hidden]{display:none!important}
+/* Compact non-action controls keep their designed size. */
+html body #chag-install-banner .chag-install-close{height:auto!important;min-height:0!important;max-height:none!important;padding:0!important}
+html body #chag-install-banner button{height:auto!important;min-height:34px!important;max-height:none!important;padding:5px 10px!important}
+html body .chag-install-instructions button{height:auto!important;min-height:0!important;max-height:none!important;padding:10px 20px!important}
+html body .ap{height:auto!important;min-height:0!important;max-height:none!important}
