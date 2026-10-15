@@ -1,6 +1,6 @@
 /* CHAG single action-height source. Wallet APIs read --btn-h at mount. */
 :root{--btn-h:48px;--btn-radius:999px;--btn-border:2px}
-html body button:not(.card):not(.orderrow):not([role="option"]),html body a.btn,html body .btn,html body .method,html body .checkout-jump{box-sizing:border-box!important;height:var(--btn-h)!important;min-height:var(--btn-h)!important;max-height:var(--btn-h)!important;padding-top:0!important;padding-bottom:0!important;align-items:center;justify-content:center}
+html body button:not(.card):not(.orderrow):not([role="option"]):not(.chag-install-close):not(.chag-install-instructions button):not(.ap),html body a.btn,html body .btn,html body .method,html body .checkout-jump{box-sizing:border-box!important;height:var(--btn-h)!important;min-height:var(--btn-h)!important;max-height:var(--btn-h)!important;padding-top:0!important;padding-bottom:0!important;align-items:center;justify-content:center}
 html body .btn,html body .method,html body .checkout-jump{display:inline-flex!important;border-width:var(--btn-border)!important}
 html body #stripe-apple-element{box-sizing:border-box;height:var(--btn-h)!important;min-height:var(--btn-h)!important;max-height:var(--btn-h)!important;outline:0!important;border:var(--btn-border) solid #888;border-radius:var(--btn-radius);background:#000;overflow:hidden;padding:0}
 html body #stripe-apple-element>div,html body #stripe-apple-element iframe{height:calc(var(--btn-h) - 2 * var(--btn-border))!important;min-height:0!important;max-height:calc(var(--btn-h) - 2 * var(--btn-border))!important;display:block!important}
@@ -11,7 +11,5 @@ html body button[hidden],html body .btn[hidden],html body .method[hidden],html b
 /* Compact non-action controls keep their designed size. */
 html body #chag-install-banner .chag-install-close{height:auto!important;min-height:0!important;max-height:none!important;padding:0!important}
 html body #chag-install-banner button{height:auto!important;min-height:34px!important;max-height:none!important;padding:5px 10px!important}
-html body .chag-install-instructions button{height:auto!important;min-height:0!important;max-height:none!important;padding:10px 20px!important}
-html body .ap{height:auto!important;min-height:0!important;max-height:none!important}
 /* Ads reorder arrows keep their compact round shape. */
-html body .ad-arrows .btn{height:44px!important;min-height:44px!important;max-height:44px!important;padding:8px!important}
+html body #ad-list .ad-arrows .btn{height:44px!important;min-height:44px!important;max-height:44px!important;padding:8px!important}
